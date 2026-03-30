@@ -1,0 +1,17 @@
+{
+    "name": "smart-expense-manager",
+    "version": "2.0.0",
+    "description": "Smart Expense Manager is a simple and efficient web application for managing your expenses. It allows you to track your spending, categorize expenses, and view reports to help you stay on top of your finances.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js"
+    },
+    "dependencies": {
+        "better-sqlite3": "^9.4.3",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3"
+    },
+    "author": "SmartExpense",
+    "license": "MIT"
+}
