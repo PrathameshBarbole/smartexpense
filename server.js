@@ -1,33 +1,31 @@
 /**
  * ══════════════════════════════════════════════════════════
  *   SMART EXPENSE MANAGER — SERVER
- *   Node.js + Express + better-sqlite3
+ *   Node.js + Express + built-in SQLite (node:sqlite)
  *   Database saved as: expense.db  (same folder as server.js)
  * ══════════════════════════════════════════════════════════
  *
  *  HOW TO RUN:
  *    1.  npm install
  *    2.  node server.js
- *    3.  Open http://localhost:3000
+ *    3.  Open http://localhost:3001
  */
 
 'use strict';
 
 const express = require('express');
 const session = require('express-session');
-const Database = require('better-sqlite3');
+const { DatabaseSync } = require('node:sqlite');
 const crypto = require('crypto');
 const path = require('path');
-const fs = require('fs');
 
 // ── Config ─────────────────────────────────────────────────
 const PORT = 3001;
 const DB_FILE = path.join(__dirname, 'expense.db');
 
 // ── Database ────────────────────────────────────────────────
-const db = new Database(DB_FILE);
-db.pragma('journal_mode = WAL');   // Better concurrent access
-db.pragma('foreign_keys = ON');
+const db = new DatabaseSync(DB_FILE);
+db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;'); // Better concurrent access
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
